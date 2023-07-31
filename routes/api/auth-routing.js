@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateBody } = require("../../middlewares");
+const { validateBody, authenticate } = require("../../middlewares");
 const { schemas } = require("../../schemas/userJoiSchemas");
 const { controlWrapper } = require("../../helpers");
 const authController = require("../../controllers/users/index");
@@ -17,6 +17,15 @@ router.post(
   controlWrapper(authController.login)
 );
 
-router.post("/login");
+router.post("/logout", authenticate, controlWrapper(authController.logout));
+
+router.get("/current", authenticate, controlWrapper(authController.getCurrent));
+
+router.put(
+  "/change",
+  authenticate,
+  validateBody(schemas.updateSchema),
+  controlWrapper(authController.updateUser)
+);
 
 module.exports = router;

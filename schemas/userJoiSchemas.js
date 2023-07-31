@@ -12,6 +12,11 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-const schemas = { registerSchema, loginSchema };
+const updateSchema = Joi.object({
+  phone: Joi.string().pattern(ukrainePhoneRegex).required(),
+  password: Joi.string().required(),
+  fullName: Joi.string().trim().min(6).max(100).required(),
+});
+const schemas = { registerSchema, loginSchema, updateSchema };
 
 module.exports = { schemas };

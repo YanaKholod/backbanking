@@ -16,11 +16,13 @@ const register = async (req, res, next) => {
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
+    role: "user",
   });
 
   res.status(201).json({
     phone: newUser.phone,
     fullName: newUser.fullName,
+    role: newUser.role,
   });
 };
 
