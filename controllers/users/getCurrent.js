@@ -1,9 +1,9 @@
 const getCurrent = async (req, res) => {
-  const { phone, name } = req.user;
+  const { phone, fullName } = req.user;
 
   res.json({
     phone,
-    name,
+    fullName,
   });
 };
 

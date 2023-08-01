@@ -1,6 +1,6 @@
 const Company = require("../../models/company");
 
-const getByIban = async (req, res, next) => {
+const getByIban = async (req, res) => {
   const { iban } = req.params;
   const company = await Company.findOne({ iban });
 

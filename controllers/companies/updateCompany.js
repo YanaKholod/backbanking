@@ -1,7 +1,7 @@
 const { HttpError } = require("../../helpers");
 const Company = require("../../models/company");
 
-const updateCompany = async (req, res, next) => {
+const updateCompany = async (req, res) => {
   const { role } = req.user;
 
   if (role !== "admin") {

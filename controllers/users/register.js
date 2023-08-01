@@ -2,7 +2,7 @@ const { HttpError } = require("../../helpers");
 const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
   console.log("Received a request to register:", req.body);
 
   const { phone, password } = req.body;

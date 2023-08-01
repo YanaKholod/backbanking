@@ -1,6 +1,6 @@
 const Company = require("../../models/company");
 
-const addCompany = async (req, res, next) => {
+const addCompany = async (req, res) => {
   const { role } = req.user;
 
   if (role !== "admin") {

@@ -20,6 +20,13 @@ router.get(
   controlWrapper(companyController.getByName)
 );
 
+router.get(
+  "/:id",
+  authenticate,
+  isValidId,
+  controlWrapper(companyController.getByIban)
+);
+
 router.post(
   "/",
   authenticate,
@@ -28,7 +35,7 @@ router.post(
 );
 
 router.put(
-  "/:id",
+  "/:id/change",
   authenticate,
   isValidId,
   validateBody(schemas.addCompanySchema),
