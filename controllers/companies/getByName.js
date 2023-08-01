@@ -1,6 +1,6 @@
 const Company = require("../../models/company");
 
-const getByName = async (req, res, next) => {
+const getByName = async (req, res) => {
   const { companyName } = req.params;
   const company = await Company.findOne({ companyName });
 

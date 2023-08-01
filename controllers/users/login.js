@@ -4,7 +4,7 @@ const { HttpError } = require("../../helpers");
 const User = require("../../models/user");
 const { SECRET_KEY } = process.env;
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
   const { phone, password } = req.body;
   const user = await User.findOne({ phone });
 
@@ -21,7 +21,7 @@ const login = async (req, res, next) => {
     id: user._id,
   };
 
-  const token = jwt.sign(payload, SECRET_KEY, { expiresInt: "24h" });
+  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "24h" });
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
@@ -29,6 +29,7 @@ const login = async (req, res, next) => {
     user: {
       phone: user.phone,
       fullName: user.fullName,
+      role: user.role,
     },
   });
 };

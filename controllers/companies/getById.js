@@ -1,19 +1,20 @@
 const { HttpError } = require("../../helpers");
 const Company = require("../../models/company");
 
-const deleteCompanyById = async (req, res) => {
+const getById = async (req, res) => {
   const { role } = req.user;
+
   if (role !== "admin") {
-    return res.status(403).json({ error: "Only admin can delete the company" });
+    return res.status(403).json({ error: "Only admin can search the company" });
   }
   const { id } = req.params;
-  const result = await Company.findByIdAndRemove(id);
+
+  const result = await Company.findById(id);
 
   if (!result) {
     throw new HttpError(404, "Not found");
   }
-
-  res.json("Delete success");
+  res.json(result);
 };
 
-module.exports = deleteCompanyById;
+module.exports = getById;
