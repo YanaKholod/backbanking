@@ -1,10 +1,5 @@
 const express = require("express");
-const {
-  authenticate,
-  validateBody,
-  isValidId,
-  // roles,
-} = require("../../middlewares");
+const { authenticate, validateBody, isValidId } = require("../../middlewares");
 const { schemas } = require("../../schemas/companyJoiSchema");
 const { controlWrapper } = require("../../helpers");
 const companyController = require("../../controllers/companies/index");
