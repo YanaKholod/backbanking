@@ -7,10 +7,11 @@ const getById = async (req, res) => {
   if (role !== "admin") {
     return res.status(403).json({ error: "Only admin can search the company" });
   }
+
   const { id } = req.params;
 
   const result = await Company.findById(id);
-
+  console.log("RESULT", result);
   if (!result) {
     throw new HttpError(404, "Not found");
   }

@@ -1,5 +1,10 @@
 const express = require("express");
-const { authenticate, validateBody, isValidId } = require("../../middlewares");
+const {
+  authenticate,
+  validateBody,
+  isValidId,
+  // roles,
+} = require("../../middlewares");
 const { schemas } = require("../../schemas/companyJoiSchema");
 const { controlWrapper } = require("../../helpers");
 const companyController = require("../../controllers/companies/index");
@@ -7,24 +12,23 @@ const companyController = require("../../controllers/companies/index");
 const router = express.Router();
 
 router.get(
-  "/:iban",
+  "/iban/:iban",
   authenticate,
   isValidId,
   controlWrapper(companyController.getByIban)
 );
-
-router.get(
-  "/:name",
-  authenticate,
-  isValidId,
-  controlWrapper(companyController.getByName)
-);
-
 router.get(
   "/:id",
   authenticate,
   isValidId,
-  controlWrapper(companyController.getByIban)
+  controlWrapper(companyController.getById)
+);
+
+router.get(
+  "name/:name",
+  authenticate,
+  isValidId,
+  controlWrapper(companyController.getByName)
 );
 
 router.post(
@@ -34,11 +38,10 @@ router.post(
   controlWrapper(companyController.addCompany)
 );
 
-router.put(
+router.patch(
   "/:id/change",
   authenticate,
   isValidId,
-  validateBody(schemas.addCompanySchema),
   controlWrapper(companyController.updateCompany)
 );
 
