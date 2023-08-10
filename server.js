@@ -4,13 +4,8 @@ const mongoose = require("mongoose");
 const { DB_HOST } = process.env;
 const PORT = 8080;
 
-const mongooseOptions = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
-
 mongoose
-  .connect(DB_HOST, mongooseOptions)
+  .connect(DB_HOST)
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
