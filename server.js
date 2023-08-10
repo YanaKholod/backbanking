@@ -3,12 +3,17 @@ const mongoose = require("mongoose");
 
 const { DB_HOST, PORT = 8080 } = process.env;
 
-mongoose.set("strictQuery", true);
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+};
 
 mongoose
-  .connect(DB_HOST)
+  .connect(DB_HOST, mongooseOptions)
   .then(() => {
-   app.listen(PORT);
+    app.listen(PORT);
     console.log("Success server");
   })
   .catch((error) => {
