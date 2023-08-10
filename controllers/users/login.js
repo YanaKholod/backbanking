@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const { HttpError } = require("../../helpers");
 const User = require("../../models/user");
 const { SECRET_KEY } = process.env;
+require('dotenv').config();
 
 const login = async (req, res) => {
   const { phone, password } = req.body;
