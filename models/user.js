@@ -10,7 +10,10 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      match: ukrainePhoneRegex,
+      validate: {
+        validator: (value) => ukrainePhoneRegex.test(value),
+        message: "Invalid phone number format",
+      },
       required: [true, "Phone is required"],
       unique: true,
     },
