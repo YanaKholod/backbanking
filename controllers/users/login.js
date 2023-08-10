@@ -28,7 +28,7 @@ const login = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    // token,
+    token, //must be hidden for user
     user: {
       phone: user.phone,
       fullName: user.fullName,
