@@ -2,12 +2,11 @@ const app = require("./index");
 const mongoose = require("mongoose");
 
 const { DB_HOST, PORT = 8080 } = process.env;
+console.log(process.env);
 
 const mongooseOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
 };
 
 mongoose
