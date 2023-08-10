@@ -1,9 +1,7 @@
 const app = require("./index");
 const mongoose = require("mongoose");
 
-// const { DB_HOST, PORT = 8080 } = process.env;
-const DB_HOST =
-  "mongodb+srv://kholodjana:1JUK9JPUWrztR9y3@yana.ihalwdp.mongodb.net/banking?retryWrites=true&w=majority";
+const { DB_HOST } = process.env;
 const PORT = 8080;
 
 const mongooseOptions = {
