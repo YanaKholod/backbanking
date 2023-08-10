@@ -5,10 +5,11 @@
   "description": "server for banking",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js"
+    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js"
   },
   "author": "Yana Kholod",
-  "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "chokidar": "^3.5.3",
