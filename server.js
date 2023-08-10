@@ -13,10 +13,11 @@ const mongooseOptions = {
 mongoose
   .connect(DB_HOST, mongooseOptions)
   .then(() => {
-    app.listen(PORT);
-    console.log("Success server");
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
   })
   .catch((error) => {
-    console.log(error.message);
+    console.error("MongoDB connection error:", error);
     process.exit(1);
   });
