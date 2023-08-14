@@ -6,6 +6,7 @@ const companyController = require("../../controllers/companies/index");
 
 const router = express.Router();
 
+router.get('/all', authenticate, companyController.getAll);
 router.get(
   "/iban/:iban",
   authenticate,
