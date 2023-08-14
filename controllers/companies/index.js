@@ -4,6 +4,7 @@ const addCompany = require("./addCompany");
 const deleteCompanyById = require("./deleteCompany");
 const updateCompany = require("./updateCompany");
 const getById = require("./getById");
+const getAll = require("./getAll");
 
 module.exports = {
   getByIban,
@@ -12,4 +13,5 @@ module.exports = {
   deleteCompanyById,
   updateCompany,
   getById,
+  getAll,
 };
