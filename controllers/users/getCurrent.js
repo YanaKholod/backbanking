@@ -4,6 +4,7 @@ const getCurrent = async (req, res) => {
   res.json({
     phone,
     fullName,
+    role
   });
 };
 
