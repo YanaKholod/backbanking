@@ -42,7 +42,7 @@ router.patch(
 );
 
 router.delete(
-  "/:id",
+  "delete/:id",
   authenticate,
   isValidId,
   controlWrapper(companyController.deleteCompanyById)
