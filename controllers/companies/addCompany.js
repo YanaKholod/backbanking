@@ -9,12 +9,10 @@ const addCompany = async (req, res) => {
 
   const { _id: owner } = req.user;
 
-  // const result = await Company.create(...req.body, owner);
-  // // User.update();
-  // res.status(201).json(result);
+  
   const companyData = {
     ...req.body,
-    owner, // Add the owner property to the company data
+    owner, 
   };
 
   try {
