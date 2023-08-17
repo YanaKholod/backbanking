@@ -34,7 +34,7 @@ router.post(
   controlWrapper(companyController.addCompany)
 );
 
-router.patch(
+router.put(
   "change/:id",
   authenticate,
   isValidId,
