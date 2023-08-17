@@ -6,11 +6,12 @@ const deleteCompanyById = async (req, res) => {
   if (role !== "admin") {
     return res.status(403).json({ error: "Only admin can delete the company" });
   }
-  const { _id } = req.params;
-  const result = await Company.findByIdAndRemove(_id);
+  const { id } = req.params;
+
+  const result = await Company.findByIdAndRemove(id);
 
   if (!result) {
-    throw new HttpError(404, "Not found");
+    throw new HttpError(404, "Not found 1");
   }
 
   res.json("Delete success");

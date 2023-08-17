@@ -17,7 +17,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/companies", companyRoute);
 
 app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
+  res.status(404).json({ message: "Not found " });
 });
 
 app.use((err, req, res, next) => {

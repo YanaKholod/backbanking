@@ -6,7 +6,7 @@ const companyController = require("../../controllers/companies/index");
 
 const router = express.Router();
 
-router.get('/all', authenticate, companyController.getAll);
+router.get("/all", authenticate, companyController.getAll);
 router.get(
   "/iban/:iban",
   authenticate,
@@ -21,7 +21,7 @@ router.get(
 );
 
 router.get(
-  "name/:name",
+  "/name/:name",
   authenticate,
   isValidId,
   controlWrapper(companyController.getByName)
@@ -35,14 +35,14 @@ router.post(
 );
 
 router.put(
-  "change/:id",
+  "/change/:id",
   authenticate,
   isValidId,
   controlWrapper(companyController.updateCompany)
 );
 
 router.delete(
-  "delete/:id",
+  "/delete/:id",
   authenticate,
   isValidId,
   controlWrapper(companyController.deleteCompanyById)

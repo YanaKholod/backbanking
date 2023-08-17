@@ -4,7 +4,9 @@ const getAllCompanies = async (req, res) => {
   const { role } = req.user;
 
   if (role !== "admin") {
-    return res.status(403).json({ error: "Only admin can retrieve all companies" });
+    return res
+      .status(403)
+      .json({ error: "Only admin can retrieve all companies" });
   }
 
   try {

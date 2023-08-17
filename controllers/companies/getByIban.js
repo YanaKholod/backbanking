@@ -1,3 +1,4 @@
+const { HttpError } = require("../../helpers");
 const Company = require("../../models/company");
 
 const getByIban = async (req, res) => {
@@ -6,7 +7,7 @@ const getByIban = async (req, res) => {
   const company = await Company.findOne({ iban });
 
   if (!company) {
-    return res.status(404).json({ error: "Company not found" });
+    throw new HttpError(404, "Company not found");
   }
 
   res.json(company);
