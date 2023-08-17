@@ -7,10 +7,10 @@ const updateCompany = async (req, res) => {
   if (role !== "admin") {
     return res.status(403).json({ error: "Only admin can update the company" });
   }
-  const { id } = req.params;
+  const { _id } = req.params;
   const updateInfo = req.body;
 
-  const result = await Company.findByIdAndUpdate(id, updateInfo, {
+  const result = await Company.findByIdAndUpdate(_id, updateInfo, {
     new: true,
   });
 
