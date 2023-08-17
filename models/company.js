@@ -8,7 +8,7 @@ const companySchema = new Schema(
     countryCode: {
       type: String,
       required: true,
-      enum: ["UA", "US", "EU"],
+    
       default: "UA",
     },
     edpnou: { type: String, required: true, minlength: 6 },
