@@ -1,5 +1,4 @@
-const getByIban = require("./getByIbanOrName");
-const getByName = require("./getByName");
+const getByIbanOrName = require("./getByIbanOrName");
 const addCompany = require("./addCompany");
 const deleteCompanyById = require("./deleteCompany");
 const updateCompany = require("./updateCompany");
