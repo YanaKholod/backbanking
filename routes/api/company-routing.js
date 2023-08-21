@@ -21,7 +21,7 @@ router.get(
 );
 
 router.get(
-  "identifier/:identifier",
+  "/identifier/:identifier",
   authenticate,
   isValidId,
   controlWrapper(companyController.getByIbanOrName)
