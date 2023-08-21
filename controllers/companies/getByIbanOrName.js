@@ -4,8 +4,6 @@ const Company = require("../../models/company");
 const getByIbanOrName = async (req, res) => {
   const identifier = req.params.identifier;
   let companies = [];
-  console.log("VALUE", identifier);
-  console.log("REQUEST PARAMS", req.params);
 
   if (identifier) {
     companies = await Company.find({
