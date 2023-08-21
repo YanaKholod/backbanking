@@ -13,6 +13,13 @@ const companySchema = new Schema(
     },
     edpnou: { type: String, required: true, minlength: 6 },
   },
+  incomingTransactions: [
+      {
+        date: { type: Date, default: Date.now },
+        amount: Number, // Adjust the data type as needed
+        sender: String, // This should be the phone and name of the user
+      },
+    ],
   { versionKey: false, timestamps: true }
 );
 
