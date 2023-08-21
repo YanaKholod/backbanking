@@ -1,4 +1,4 @@
-const getByIban = require("./getByIban");
+const getByIban = require("./getByIbanOrName");
 const getByName = require("./getByName");
 const addCompany = require("./addCompany");
 const deleteCompanyById = require("./deleteCompany");
@@ -7,8 +7,7 @@ const getById = require("./getById");
 const getAll = require("./getAll");
 
 module.exports = {
-  getByIban,
-  getByName,
+  getByIbanOrName,
   addCompany,
   deleteCompanyById,
   updateCompany,
