@@ -24,7 +24,7 @@ const register = async (req, res, next) => {
     phone: newUser.phone,
     fullName: newUser.fullName,
     role: newUser.role,
-      transactions: newUser.transactions,
+      // transactions: newUser.transactions,
   });
 };
 
