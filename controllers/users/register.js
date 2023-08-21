@@ -17,12 +17,14 @@ const register = async (req, res, next) => {
     ...req.body,
     password: hashPassword,
     role: "user",
+     transactions: [],
   });
 
   res.status(201).json({
     phone: newUser.phone,
     fullName: newUser.fullName,
     role: newUser.role,
+      transactions: newUser.transactions,
   });
 };
 
