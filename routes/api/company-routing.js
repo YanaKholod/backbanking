@@ -50,7 +50,6 @@ router.patch(
 router.delete(
   "/delete/:id",
   authenticate,
-  isValidId,
   controlWrapper(companyController.deleteCompanyById)
 );
 
