@@ -2,13 +2,17 @@ const { HttpError } = require("../../helpers");
 const Company = require("../../models/company");
 
 const getByIbanOrName = async (req, res) => {
- const { iban, name } = req.params;
+const { targetValue } = req.params;
   let company;
 
-  if (iban) {
-    company = await Company.findOne({ iban });
-  } else if (name) {
-    company = await Company.findOne({ companyName: name });
+  if (targetValue) {
+  
+    company = await Company.findOne({ iban: targetValue });
+
+   
+    if (!company) {
+      company = await Company.findOne({ companyName: targetValue });
+    }
   } else {
     throw new HttpError(400, "Invalid parameters");
   }
