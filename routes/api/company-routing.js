@@ -7,12 +7,12 @@ const companyController = require("../../controllers/companies/index");
 const router = express.Router();
 
 router.get("/all", authenticate, companyController.getAll);
-router.get(
-  "/iban/:iban",
-  authenticate,
-  isValidId,
-  controlWrapper(companyController.getByIban)
-);
+// router.get(
+//   "/iban/:iban",
+//   authenticate,
+//   isValidId,
+//   controlWrapper(companyController.getByIban)
+// );
 router.get(
   "/:id",
   authenticate,
@@ -21,11 +21,17 @@ router.get(
 );
 
 router.get(
-  "/name/:name",
+  "identifier/:identifier",
   authenticate,
   isValidId,
-  controlWrapper(companyController.getByName)
+  controlWrapper(companyController.getByIbanOrName)
 );
+// router.get(
+//   "/name/:name",
+//   authenticate,
+//   isValidId,
+//   controlWrapper(companyController.getByName)
+// );
 
 router.post(
   "/",
