@@ -25,13 +25,13 @@ const userSchema = new Schema(
     token: { type: String, default: "" },
     role: { type: String, default: "user" },
   },
-  outcomingTransactions: [
-      {
-        date: { type: Date, default: Date.now },
-        amount: Number, // Adjust the data type as needed
-        company: String,
-      },
-    ],
+  // outcomingTransactions: [
+  //     {
+  //       date: { type: Date, default: Date.now },
+  //       amount: Number, // Adjust the data type as needed
+  //       company: String,
+  //     },
+  //   ],
   { versionKey: false, timestamps: true }
 );
 
