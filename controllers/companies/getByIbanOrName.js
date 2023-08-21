@@ -7,8 +7,12 @@ const getByIbanOrName = async (req, res) => {
 
   if (identifier) {
     companies = await Company.find({
-      $or: [{ iban: identifier }, { companyName: identifier }],
+      $or: [
+        { iban: { $regex: identifier, $options: "i" } },
+        { companyName: { $regex: identifier, $options: "i" } },
+      ],
     });
+    console.log(companies);
   } else {
     throw new HttpError(400, "Invalid parameters");
   }
