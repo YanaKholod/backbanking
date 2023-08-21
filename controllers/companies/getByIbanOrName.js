@@ -20,4 +20,4 @@ const getByIbanOrName = async (req, res) => {
   res.json(company);
 };
 
-module.exports = getByIban;
+module.exports = getByIbanOrName;
