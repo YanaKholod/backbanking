@@ -4,9 +4,9 @@ const Company = require("../../models/company");
 const getById = async (req, res) => {
   const { role } = req.user;
 
-  if (role !== "admin") {
-    return res.status(403).json({ error: "Only admin can search the company" });
-  }
+  // if (role !== "admin") {
+  //   return res.status(403).json({ error: "Only admin can search the company" });
+  // }
 
   const { id } = req.params;
 
