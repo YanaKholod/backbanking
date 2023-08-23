@@ -34,7 +34,7 @@ const userSchema = new Schema(
     outcomingTransactions: [
       {
         date: { type: Date, default: Date.now },
-        amount: { Number, default: "" },
+        amount: { Number, default: 0 },
         company: { String, default: "" },
         purpose: { String, default: "" },
       },
