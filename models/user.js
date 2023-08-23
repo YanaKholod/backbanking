@@ -24,13 +24,19 @@ const userSchema = new Schema(
     },
     token: { type: String, default: "" },
     role: { type: String, default: "user" },
-    cards: [{ cardType: String, cardNumber: String, balance: String }],
+    cards: [
+      {
+        cardType: { String, default: "" },
+        cardNumber: { String, default: "" },
+        balance: { Number, default: "" },
+      },
+    ],
     outcomingTransactions: [
       {
-        date: { type: Date },
-        amount: Number,
-        company: String,
-        purpose: String,
+        date: { type: Date, default: "" },
+        amount: { Number, default: "" },
+        company: { String, default: "" },
+        purpose: { String, default: "" },
       },
     ],
   },
