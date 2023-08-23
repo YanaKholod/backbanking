@@ -33,7 +33,7 @@ const login = async (req, res) => {
       phone: user.phone,
       fullName: user.fullName,
       role: user.role,
-      id: user._id, //
+      id: user.id, //
     },
   });
 };
