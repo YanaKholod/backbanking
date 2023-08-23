@@ -24,21 +24,21 @@ const userSchema = new Schema(
     },
     token: { type: String, default: "" },
     role: { type: String, default: "user" },
-    // cards: [
-    //   {
-    //     cardType: { String, default: "" },
-    //     cardNumber: { String, default: "" },
-    //     balance: { Number, default: 0 },
-    //   },
-    // ],
-    // outcomingTransactions: [
-    //   {
-    //     date: { type: Date, default: Date.now },
-    //     amount: { Number, default: 0 },
-    //     company: { String, default: "" },
-    //     purpose: { String, default: "" },
-    //   },
-    // ],
+    cards: [
+      {
+        cardType: { type: String, default: "" },
+        cardNumber: { type: String, default: "" },
+        balance: { type: Number, default: 0 },
+      },
+    ],
+    outcomingTransactions: [
+      {
+        date: { type: Date, default: Date.now },
+        amount: { type: Number, default: 0 },
+        company: { type: String, default: "" },
+        purpose: { type: String, default: "" },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );

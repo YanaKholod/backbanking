@@ -12,15 +12,15 @@ const companySchema = new Schema(
       default: "UA",
     },
     edpnou: { type: String, required: true, minlength: 6 },
-    // balance: { type: Number, default: 0 },
-    // incomingTransactions: [
-    //   {
-    //     date: { type: Date, default: Date.now },
-    //     amount: { Number, default: 0 },
-    //     sender: { String, default: "" },
-    //     purpose: { String, default: "" },
-    //   },
-    // ],
+    balance: { type: Number, default: 0 },
+    incomingTransactions: [
+      {
+        date: { type: Date, default: Date.now },
+        amount: { type: Number, default: 0 },
+        sender: { type: String, default: "" },
+        purpose: { type: String, default: "" },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
