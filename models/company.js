@@ -12,11 +12,11 @@ const companySchema = new Schema(
       default: "UA",
     },
     edpnou: { type: String, required: true, minlength: 6 },
-    balance: { type: Number, default: "" },
+    balance: { type: Number, default: 0 },
     incomingTransactions: [
       {
-        date: { type: Date },
-        amount: { Number, default: "" },
+        date: { type: Date, default: Date.now },
+        amount: { Number, default: 0 },
         sender: { String, default: "" },
         purpose: { String, default: "" },
       },

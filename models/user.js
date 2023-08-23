@@ -28,12 +28,12 @@ const userSchema = new Schema(
       {
         cardType: { String, default: "" },
         cardNumber: { String, default: "" },
-        balance: { Number, default: "" },
+        balance: { Number, default: 0 },
       },
     ],
     outcomingTransactions: [
       {
-        date: { type: Date, default: "" },
+        date: { type: Date, default: Date.now },
         amount: { Number, default: "" },
         company: { String, default: "" },
         purpose: { String, default: "" },
