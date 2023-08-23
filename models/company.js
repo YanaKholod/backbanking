@@ -8,18 +8,20 @@ const companySchema = new Schema(
     countryCode: {
       type: String,
       required: true,
-    
+
       default: "UA",
     },
     edpnou: { type: String, required: true, minlength: 6 },
+    balance: { type: String },
+    incomingTransactions: [
+      {
+        date: { type: Date },
+        amount: Number,
+        sender: String,
+        purpose: String,
+      },
+    ],
   },
-  // incomingTransactions: [
-  //     {
-  //       date: { type: Date, default: Date.now },
-  //       amount: Number, // Adjust the data type as needed
-  //       sender: String, // This should be the phone and name of the user
-  //     },
-  //   ],
   { versionKey: false, timestamps: true }
 );
 
