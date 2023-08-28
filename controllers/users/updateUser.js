@@ -29,7 +29,7 @@ const { HttpError } = require("../../helpers");
 //   });
 // };
 const updateUser = async (req, res) => {
-  const { phone, card } = req.body;
+  const { phone, cards } = req.body;
 
   const user = await User.findOne({ phone });
 
@@ -46,8 +46,8 @@ const updateUser = async (req, res) => {
   //   user.fullName = fullName;
   // }
 
-  if (card) {
-    user.cards.push(card);
+  if (cards) {
+    user.cards.push(cards);
   }
 
   await user.save();
