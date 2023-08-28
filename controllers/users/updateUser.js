@@ -29,7 +29,7 @@ const { HttpError } = require("../../helpers");
 //   });
 // };
 const updateUser = async (req, res) => {
-  const { phone, password, fullName, card } = req.body;
+  const { phone, card } = req.body;
 
   const user = await User.findOne({ phone });
 
@@ -37,14 +37,14 @@ const updateUser = async (req, res) => {
     throw new HttpError(404, "User not found");
   }
 
-  if (password) {
-    const hashPassword = await bcrypt.hash(password, 10);
-    user.password = hashPassword;
-  }
+  // if (password) {
+  //   const hashPassword = await bcrypt.hash(password, 10);
+  //   user.password = hashPassword;
+  // }
 
-  if (fullName) {
-    user.fullName = fullName;
-  }
+  // if (fullName) {
+  //   user.fullName = fullName;
+  // }
 
   if (card) {
     user.cards.push(card);
@@ -62,4 +62,4 @@ const updateUser = async (req, res) => {
 
 module.exports = updateUser;
 
-module.exports = updateUser;
+// module.exports = updateUser;
