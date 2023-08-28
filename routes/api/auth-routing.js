@@ -24,7 +24,7 @@ router.get("/current", authenticate, controlWrapper(authController.getCurrent));
 router.patch(
   "/change",
   authenticate,
-  validateBody(schemas.updateSchema),
+  // validateBody(schemas.updateSchema),
   controlWrapper(authController.updateUser)
 );
 
