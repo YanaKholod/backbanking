@@ -24,8 +24,13 @@ router.get("/current", authenticate, controlWrapper(authController.getCurrent));
 router.patch(
   "/change",
   authenticate,
-  // validateBody(schemas.updateSchema),
   controlWrapper(authController.updateUser)
+);
+
+router.patch(
+  "/transaction",
+  authenticate,
+  controlWrapper(authController.performTransaction)
 );
 
 module.exports = router;
