@@ -12,8 +12,8 @@ const performTransaction = async (req, res, next) => {
     throw new HttpError(404, "User or company not found");
   }
 
-  const card = user.cards.find((card) => card._id === cardId);
-
+ const card = user.cards.find((card) => card._id.equals(mongoose.Types.ObjectId(cardId)));
+  
   if (!card) {
     throw new HttpError(400, "Card not found");
   }
