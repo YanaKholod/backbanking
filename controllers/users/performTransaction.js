@@ -1,6 +1,8 @@
 const { HttpError } = require("../../helpers");
 const Company = require("../../models/company");
 const User = require("../../models/user");
+const mongoose = require("mongoose"); 
+
 
 const performTransaction = async (req, res, next) => {
   const { userId, companyId, cardId, amount, purpose } = req.body;
