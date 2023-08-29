@@ -27,14 +27,14 @@ const performTransaction = async (req, res, next) => {
   card.balance -= amount;
   user.outcomingTransactions.push({
     amount,
-    company: company.companyName,
+    company: {company.companyName, company.id},
     purpose,
   });
 
   company.balance += amount;
   company.incomingTransactions.push({
     amount,
-    sender: user.fullName,
+    sender: {user.fullName, user.id},
     purpose,
   });
 
