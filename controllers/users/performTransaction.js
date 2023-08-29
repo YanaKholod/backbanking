@@ -2,7 +2,7 @@ const { HttpError } = require("../../helpers");
 const Company = require("../../models/company");
 const User = require("../../models/user");
 
-const performTransaction = async (req, res) => {
+const performTransaction = async (req, res, next) => {
   const { userId, companyId, cardId, amount, purpose } = req.body;
 
   const user = await User.findById(userId);
