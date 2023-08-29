@@ -44,4 +44,4 @@ const performTransaction = async (req, res, next) => {
   });
 };
 
-module.exports = { performTransaction };
+module.exports =  performTransaction ;
