@@ -4,7 +4,7 @@ const { HttpError } = require("../../helpers");
 const updateUser = async (req, res) => {
   const { id, card } = req.body;
 
-  const user = await User.findOne({ id });
+  const user = await User.findOne({ _id:id });
 
   if (!user) {
     throw new HttpError(404, "User not found");
