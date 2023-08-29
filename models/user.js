@@ -35,7 +35,11 @@ const userSchema = new Schema(
       {
         date: { type: Date, default: Date.now },
         amount: { type: Number, default: 0 },
-        company: { type: String, default: "" },
+        company: {
+          
+          companyName: { type: String, default: "" },
+          companyId: { type: Schema.Types.ObjectId, ref: "companies" }, 
+        },
         purpose: { type: String, default: "" },
       },
     ],
