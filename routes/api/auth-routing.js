@@ -22,7 +22,7 @@ router.post("/logout", authenticate, controlWrapper(authController.logout));
 router.get("/current", authenticate, controlWrapper(authController.getCurrent));
 
 router.get(
-  "/allUsers",
+  "/all",
   authenticate,
   controlWrapper(authController.getAllUsers)
 );
