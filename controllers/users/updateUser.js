@@ -10,10 +10,17 @@ const updateUser = async (req, res) => {
     throw new HttpError(404, "User not found");
   }
 
-  if (card) {
-    user.cards.push(card);
-  }
+ if (card) {
+    const existingCard = user.cards.find((existingCard) => existingCard.cardType === card.cardType);
 
+    if (existingCard) {
+      existingCard.cardNumber = card.cardNumber;
+      existingCard.balance = card.balance;
+    } else {
+      user.cards.push(card);
+    }
+  }
+  
   await user.save();
 
   res.json({
