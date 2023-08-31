@@ -22,9 +22,8 @@ router.post("/logout", authenticate, controlWrapper(authController.logout));
 router.get("/current", authenticate, controlWrapper(authController.getCurrent));
 
 router.get(
-  "/:id",
+  "/userInfo/:id",
   authenticate,
-  isValidId,
   controlWrapper(authController.getUserById)
 );
 
