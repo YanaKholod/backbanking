@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateBody, authenticate } = require("../../middlewares");
+const { validateBody, authenticate, isValidId } = require("../../middlewares");
 const { schemas } = require("../../schemas/userJoiSchemas");
 const { controlWrapper } = require("../../helpers");
 const authController = require("../../controllers/users/index");
@@ -22,10 +22,13 @@ router.post("/logout", authenticate, controlWrapper(authController.logout));
 router.get("/current", authenticate, controlWrapper(authController.getCurrent));
 
 router.get(
-  "/all",
+  "/:id",
   authenticate,
-  controlWrapper(authController.getAllUsers)
+  isValidId,
+  controlWrapper(authController.getUserById)
 );
+
+router.get("/all", authenticate, controlWrapper(authController.getAllUsers));
 
 router.patch(
   "/change",

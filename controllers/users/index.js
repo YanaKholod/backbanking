@@ -5,6 +5,7 @@ const getCurrent = require("./getCurrent");
 const updateUser = require("./updateUser");
 const performTransaction = require("./performTransaction");
 const getAllUsers = require("./getAll");
+const getUserById = require("./getUserById");
 
 module.exports = {
   register,
@@ -14,4 +15,5 @@ module.exports = {
   updateUser,
   performTransaction,
   getAllUsers,
+  getUserById,
 };
