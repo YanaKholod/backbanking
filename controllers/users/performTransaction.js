@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 
 const performTransaction = async (req, res, next) => {
-  const { userId, companyId, cardId, amount, purpose } = req.body;
+  const { userId, companyId, cardId, amount, purpose, cardType } = req.body;
 
   const user = await User.findById(userId);
   const company = await Company.findById(companyId);
@@ -29,6 +29,7 @@ const performTransaction = async (req, res, next) => {
     amount,
     company: {companyName: company.companyName, companyId: company.id},
     purpose,
+    cardType,
   });
 
   company.balance += amount;
@@ -36,6 +37,7 @@ const performTransaction = async (req, res, next) => {
     amount,
     sender: {userName: user.fullName, userId: user.id},
     purpose,
+    
   });
 
   await user.save();
