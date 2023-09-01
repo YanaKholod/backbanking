@@ -41,6 +41,7 @@ const userSchema = new Schema(
           companyId: { type: Schema.Types.ObjectId, ref: "companies" }, 
         },
         purpose: { type: String, default: "" },
+        cardType:{ type: String, default: "" },
       },
     ],
   },
