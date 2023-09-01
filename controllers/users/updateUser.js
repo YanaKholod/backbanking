@@ -10,22 +10,15 @@ const updateUser = async (req, res) => {
     throw new HttpError(404, "User not found");
   }
 
- // if (card) {
- //    const existingCard = user.cards.find((existingCard) => existingCard.cardType === card.cardType);
+  if (card) {
+    
+    const existingCard = user.cards.find(
+      (existingCard) => existingCard.cardType === card.cardType
+    );
 
- //    if (existingCard) {
- //      existingCard.cardNumber = card.cardNumber;
- //      existingCard.balance = card.balance;
- //    } else {
- //      user.cards.push(card);
- //    }
- //  }
-   if (card) {
-    const existingCardIndex = user.cards.findIndex((existingCard) => existingCard.cardType === card.cardType);
-
-    if (existingCardIndex !== -1) {
-     
-      throw new HttpError(400, "A card of this type already exists for this user.");
+    if (existingCard) {
+      
+      throw new HttpError(400, "Card with this cardType already exists.");
     } else {
       
       user.cards.push(card);
