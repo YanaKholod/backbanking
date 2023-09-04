@@ -7,15 +7,14 @@ const getAllUsers = async (req, res) => {
     return res.status(403).json({ error: "Only admin can retrieve all users" });
   }
 
- 
-   try {
+  try {
     const page = parseInt(req.query.page) || 1;
     const perPage = parseInt(req.query.perPage) || 10;
 
     const totalUsers = await User.countDocuments({});
     const totalPages = Math.ceil(totalUsers / perPage);
 
-    const companies = await Company.find({})
+    const users = await User.find({})
       .skip((page - 1) * perPage)
       .limit(perPage);
 
