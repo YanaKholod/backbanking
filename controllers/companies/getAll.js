@@ -9,12 +9,9 @@ const getAllCompanies = async (req, res) => {
       .json({ error: "Only admin can retrieve all companies" });
   }
 
-  // try {
-  //   const companies = await Company.find({});
-  //   res.json(companies);
- try {
-    const page = parseInt(req.query.page) || 1; 
-    const perPage = parseInt(req.query.perPage) || 10; 
+try {
+    const page = parseInt(req.query.page) || 1;
+    const perPage = parseInt(req.query.perPage) || 10;
 
     const totalCompanies = await Company.countDocuments({});
     const totalPages = Math.ceil(totalCompanies / perPage);
