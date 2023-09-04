@@ -12,33 +12,23 @@ const getAllCompanies = async (req, res) => {
   // try {
   //   const companies = await Company.find({});
   //   res.json(companies);
- // try {
- //    const page = parseInt(req.query.page) || 1; 
- //    const perPage = parseInt(req.query.perPage) || 10; 
+ try {
+    const page = parseInt(req.query.page) || 1; 
+    const perPage = parseInt(req.query.perPage) || 10; 
 
- //    const totalCompanies = await Company.countDocuments({});
- //    const totalPages = Math.ceil(totalCompanies / perPage);
+    const totalCompanies = await Company.countDocuments({});
+    const totalPages = Math.ceil(totalCompanies / perPage);
 
- //    const companies = await Company.find({})
- //      .skip((page - 1) * perPage)
- //      .limit(perPage);
-
- //    res.json({
- //      companies,
- //      totalPages,
- //      currentPage: page,
- //    });
-   try {
-    const skip = (page - 1) * perPage;
-    const total = await Company.countDocuments();
     const companies = await Company.find({})
-      .skip(skip)
+      .skip((page - 1) * perPage)
       .limit(perPage);
 
     res.json({
       companies,
-      total,
+      totalPages,
+      currentPage: page,
     });
+  
   } catch (error) {
     console.error("Error fetching companies:", error);
     res.status(500).json({ error: "Internal server error" });
