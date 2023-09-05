@@ -8,6 +8,8 @@ const getCurrent = async (req, res) => {
     role,
     cards,
     outcomingTransactions,
+    incomingCardTransactions,
+    outgoingCardTransactions,
   });
 };
 
