@@ -13,7 +13,7 @@ const makePayment = async (req, res, next) => {
   const recipientUser = await User.findOne({
     "cards.cardNumber": recipientCardNumber,
   });
-
+console.log('recipientUser', recipientUser)
   const recipientCardType = recipientUser
     ? recipientUser.cards.find(
         (card) => card.cardNumber === recipientCardNumber
