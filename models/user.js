@@ -44,6 +44,18 @@ const userSchema = new Schema(
         cardType:{ type: String, default: "" },
       },
     ],
+    incomingCardTransactions: [
+      {
+        sender: {
+          fullName: { type: String, default: "" },
+          id: { type: Schema.Types.ObjectId, ref: "user" },
+        },
+        date: { type: Date, default: Date.now },
+        amount: { type: Number, default: 0 },
+        purpose: { type: String, default: "" },
+        cardType: { type: String, default: "" },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
