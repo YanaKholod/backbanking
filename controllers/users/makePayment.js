@@ -62,12 +62,12 @@ console.log('recipientUser', recipientUser);
       (card) => card.cardNumber === recipientCardNumber
     );
 
-    // if (!recipientCard) {
-    //   throw new HttpError(
-    //     400,
-    //     "Recipient card not found with the specified cardNumber"
-    //   );
-    // }
+    if (!recipientCard) {
+      throw new HttpError(
+        400,
+        "Recipient card not found with the specified cardNumber"
+      );
+    }
 
     recipientCard.balance += amount;
     const incomingTransaction = {
@@ -85,9 +85,7 @@ console.log('recipientUser', recipientUser);
   }
 
   await senderUser.save();
-  if (recipientUser) {
-    await recipientUser.save();
-  }
+   await recipientUser.save();
 
   res.json({
     message: "Payment successful",
