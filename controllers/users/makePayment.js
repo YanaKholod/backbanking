@@ -1,10 +1,9 @@
 const { HttpError } = require("../../helpers");
-const User = require("../../models/user");
 
 const makePayment = async (req, res, next) => {
   const { senderUserId, recipientCardNumber, amount, purpose, senderCardType } =
     req.body;
-  const senderUser = await User.findById(senderUserId);
+  const senderUser = await Use.findById(senderUserId);
 
   if (!senderUser) {
     throw new HttpError(404, "Sender user not found");
