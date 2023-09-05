@@ -11,7 +11,11 @@ const updateUser = async (req, res) => {
   }
 
   if (card) {
-    
+
+    if (!card.cardType) {
+        throw new HttpError(400, "Card type is required.");
+      }
+
     const existingCard = user.cards.find(
       (existingCard) => existingCard.cardType === card.cardType
     );
