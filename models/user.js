@@ -59,7 +59,8 @@ const userSchema = new Schema(
       {
         date: { type: Date, default: Date.now },
         amount: { type: Number, default: 0 },
-        sender: {
+        recipient: {
+          cardNumber: { type: String, default: "" },
           fullName: { type: String, default: "" },
           id: { type: Schema.Types.ObjectId, ref: "user" },
         },
