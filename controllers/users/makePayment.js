@@ -19,7 +19,7 @@ console.log('recipientUser', recipientUser)
         (card) => card.cardNumber === recipientCardNumber
       ).cardType
     : null;
-
+console.log('recipientCardType', recipientCardType)
   const senderCard = senderUser.cards.find(
     (card) => card.cardType === senderCardType
   );
