@@ -1,67 +1,96 @@
-const { Schema, model } = require("mongoose");
-const { ukrainePhoneRegex } = require("../constants/users");
-const { handleMongooseError } = require("../helpers");
+const { HttpError } = require("../../helpers");
+const User = require("../../models/user");
 
-const userSchema = new Schema(
-  {
-    fullName: {
-      type: String,
-      required: true,
-    },
-    phone: {
-      type: String,
-      validate: {
-        validator: (value) => ukrainePhoneRegex.test(value),
-        message: "Invalid phone number format",
-      },
-      required: [true, "Phone is required"],
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Set password for user"],
-      minlength: 6,
-    },
-    token: { type: String, default: "" },
-    role: { type: String, default: "user" },
-    cards: [
-      {
-        cardType: { type: String, default: "" },
-        cardNumber: { type: String, default: "" },
-        balance: { type: Number, default: 0 },
-      },
-    ],
-    outcomingTransactions: [
-      {
-        date: { type: Date, default: Date.now },
-        amount: { type: Number, default: 0 },
-        company: {
-          
-          companyName: { type: String, default: "" },
-          companyId: { type: Schema.Types.ObjectId, ref: "companies" }, 
+const makePayment = async (req, res, next) => {
+  const { senderUserId, recipientCardNumber, amount, purpose, senderCardType } =
+    req.body;
+  const senderUser = await User.findById(senderUserId);
+
+  if (!senderUser) {
+    throw new HttpError(404, "Sender user not found");
+  }
+
+  const recipientUser = await User.findOne({
+    "cards.cardNumber": recipientCardNumber,
+  });
+
+  const recipientCardType = recipientUser
+    ? recipientUser.cards.find(
+        (card) => card.cardNumber === recipientCardNumber
+      ).cardType
+    : null;
+
+  const senderCard = senderUser.cards.find(
+    (card) => card.cardType === senderCardType
+  );
+
+  if (!senderCard) {
+    throw new HttpError(
+      400,
+      "Sender card not found with the specified cardType"
+    );
+  }
+
+  if (senderCard.balance < amount) {
+    throw new HttpError(400, "Insufficient balance");
+  }
+
+  senderCard.balance -= amount;
+
+  const outgoingTransaction = {
+    date: new Date(),
+    amount,
+    recipient: recipientUser
+      ? {
+          cardNumber: recipientCardNumber,
+          userId: recipientUser._id,
+          userFullName: recipientUser.fullName,
+        }
+      : {
+          cardNumber: recipientCardNumber,
         },
-        purpose: { type: String, default: "" },
-        cardType:{ type: String, default: "" },
+    purpose,
+    senderCardType,
+  };
+
+  senderUser.outgoingCardTransactions.push(outgoingTransaction);
+
+  if (recipientUser) {
+    const recipientCard = recipientUser.cards.find(
+      (card) => card.cardNumber === recipientCardNumber
+    );
+
+    // if (!recipientCard) {
+    //   throw new HttpError(
+    //     400,
+    //     "Recipient card not found with the specified cardNumber"
+    //   );
+    // }
+
+    recipientCard.balance += amount;
+
+    const incomingTransaction = {
+      date: new Date(),
+      amount,
+      sender: {
+        userId: senderUserId,
+        userFullName: senderUser.fullName,
       },
-    ],
-    incomingCardTransactions: [
-      {
-        sender: {
-          fullName: { type: String, default: "" },
-          id: { type: Schema.Types.ObjectId, ref: "user" },
-        },
-        date: { type: Date, default: Date.now },
-        amount: { type: Number, default: 0 },
-        purpose: { type: String, default: "" },
-        cardType: { type: String, default: "" },
-      },
-    ],
-  },
-  { versionKey: false, timestamps: true }
-);
+      purpose,
+      recipientCardType,
+    };
 
-userSchema.post("save", handleMongooseError);
+    recipientUser.incomingCardTransactions.push(incomingTransaction);
+  }
 
-const User = model("user", userSchema);
+  await senderUser.save();
+  if (recipientUser) {
+    await recipientUser.save();
+  }
 
-module.exports = User;
+  res.json({
+    message: "Payment successful",
+  });
+};
+
+module.exports = makePayment;

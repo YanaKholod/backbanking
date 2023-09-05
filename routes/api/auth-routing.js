@@ -1,5 +1,5 @@
 const express = require("express");
-const { validateBody, authenticate, isValidId } = require("../../middlewares");
+const { validateBody, authenticate } = require("../../middlewares");
 const { schemas } = require("../../schemas/userJoiSchemas");
 const { controlWrapper } = require("../../helpers");
 const authController = require("../../controllers/users/index");
@@ -39,6 +39,12 @@ router.patch(
   "/transaction",
   authenticate,
   controlWrapper(authController.performTransaction)
+);
+
+router.patch(
+  "/makePayment",
+  authenticate,
+  controlWrapper(authController.makePayment)
 );
 
 module.exports = router;
