@@ -10,7 +10,6 @@ const makePayment = async (req, res, next) => {
     throw new HttpError(404, "Sender user not found");
   }
 
-  // Attempt to find the recipient user by cardNumber
   const recipientUser = await User.findOne({
     "cards.cardNumber": recipientCardNumber,
   });
@@ -19,7 +18,7 @@ const makePayment = async (req, res, next) => {
     ? recipientUser.cards.find(
         (card) => card.cardNumber === recipientCardNumber
       ).cardType
-    : null; // Get the recipient card type if recipientUser is found
+    : null;
 
   const senderCard = senderUser.cards.find(
     (card) => card.cardType === senderCardType
@@ -36,7 +35,6 @@ const makePayment = async (req, res, next) => {
     throw new HttpError(400, "Insufficient balance");
   }
 
-  // Deduct the amount from the sender's card balance
   senderCard.balance -= amount;
 
   const outgoingTransaction = {
@@ -50,7 +48,7 @@ const makePayment = async (req, res, next) => {
         }
       : {
           cardNumber: recipientCardNumber,
-        }, // Include recipient data if recipientUser is found
+        },
     purpose,
     senderCardType,
   };
@@ -58,7 +56,6 @@ const makePayment = async (req, res, next) => {
   senderUser.outgoingCardTransactions.push(outgoingTransaction);
 
   if (recipientUser) {
-    // Increase the recipient's balance only if recipientUser is found
     const recipientCard = recipientUser.cards.find(
       (card) => card.cardNumber === recipientCardNumber
     );
@@ -88,7 +85,7 @@ const makePayment = async (req, res, next) => {
 
   await senderUser.save();
   if (recipientUser) {
-    await recipientUser.save(); // Save recipientUser only if found
+    await recipientUser.save();
   }
 
   res.json({
