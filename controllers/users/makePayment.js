@@ -68,7 +68,6 @@ const makePayment = async (req, res, next) => {
     // }
 
     recipientCard.balance += amount;
-
     const incomingTransaction = {
       date: new Date(),
       amount,
