@@ -26,7 +26,7 @@ const userSchema = new Schema(
     role: { type: String, default: "user" },
     cards: [
       {
-        cardType: { type: String, required: true, unique: false }, // Add required: true for cardType
+        cardType: { type: String, default: "" }, // Add required: true for cardType
         cardNumber: { type: String, default: "" },
         balance: { type: Number, default: 0 },
       },
