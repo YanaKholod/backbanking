@@ -45,14 +45,14 @@ console.log('recipientUser', recipientUser);
     recipient: recipientUser
       ? {
           cardNumber: recipientCardNumber,
-          userId: recipientUser._id,
-          userFullName: recipientUser.fullName,
+          id: recipientUser._id,
+          fullName: recipientUser.fullName,
         }
       : {
           cardNumber: recipientCardNumber,
         },
     purpose,
-    senderCardType,
+    cardType: senderCardType,
   };
 
   senderUser.outgoingCardTransactions.push(outgoingTransaction);
@@ -74,11 +74,11 @@ console.log('recipientUser', recipientUser);
       date: new Date(),
       amount,
       sender: {
-        userId: senderUserId,
-        userFullName: senderUser.fullName,
+        fullName: senderUser.fullName,
+        id: senderUserId,
       },
       purpose,
-      recipientCardType,
+      cardType: recipientCardType,
     };
 
     recipientUser.incomingCardTransactions.push(incomingTransaction);
