@@ -1,74 +1,95 @@
 const { HttpError } = require("../../helpers");
 const User = require("../../models/user");
-// const mongoose = require("mongoose");
 
 const makePayment = async (req, res, next) => {
   const { senderUserId, recipientCardNumber, amount, purpose, senderCardType } =
     req.body;
-
   const senderUser = await User.findById(senderUserId);
-  const senderFullName = senderUser.fullName;
 
   if (!senderUser) {
     throw new HttpError(404, "Sender user not found");
   }
 
+  // Attempt to find the recipient user by cardNumber
   const recipientUser = await User.findOne({
     "cards.cardNumber": recipientCardNumber,
   });
 
-  if (!recipientUser) {
-    throw new HttpError(404, "Recipient user not found");
+  const recipientCardType = recipientUser
+    ? recipientUser.cards.find(
+        (card) => card.cardNumber === recipientCardNumber
+      ).cardType
+    : null; // Get the recipient card type if recipientUser is found
+
+  const senderCard = senderUser.cards.find(
+    (card) => card.cardType === senderCardType
+  );
+
+  if (!senderCard) {
+    throw new HttpError(
+      400,
+      "Sender card not found with the specified cardType"
+    );
   }
 
-  if (senderUser.cards.some((card) => card.balance < amount)) {
+  if (senderCard.balance < amount) {
     throw new HttpError(400, "Insufficient balance");
   }
 
-  senderUser.cards.forEach((card, amount) => {
-    if (card.balance >= amount) {
-      card.balance -= amount;
-      return;
-    }
-    amount -= card.balance;
-    card.balance = 0;
-  });
+  // Deduct the amount from the sender's card balance
+  senderCard.balance -= amount;
 
   const outgoingTransaction = {
     date: new Date(),
     amount,
-    recipient: {
-      cardNumber: recipientCardNumber,
-      userId: recipientUser._id,
-    },
+    recipient: recipientUser
+      ? {
+          cardNumber: recipientCardNumber,
+          userId: recipientUser._id,
+          userFullName: recipientUser.fullName,
+        }
+      : {
+          cardNumber: recipientCardNumber,
+        }, // Include recipient data if recipientUser is found
     purpose,
     senderCardType,
   };
 
-  senderUser.outgoingTransactions.push(outgoingTransaction);
+  senderUser.outgoingCardTransactions.push(outgoingTransaction);
 
-  // Increase the recipient's balance
-  recipientUser.cards.find(
-    (card) => card.cardNumber === recipientCardNumber
-  ).balance += amount;
+  if (recipientUser) {
+    // Increase the recipient's balance only if recipientUser is found
+    const recipientCard = recipientUser.cards.find(
+      (card) => card.cardNumber === recipientCardNumber
+    );
 
-  // Create an incoming transaction for the recipient
-  const incomingTransaction = {
-    date: new Date(),
-    amount,
-    sender: {
-      userId: senderUserId,
-      useFullName: senderFullName,
-    },
-    purpose,
-    senderCardType,
-  };
+    // if (!recipientCard) {
+    //   throw new HttpError(
+    //     400,
+    //     "Recipient card not found with the specified cardNumber"
+    //   );
+    // }
 
-  recipientUser.incomingCardTransactions.push(incomingTransaction);
+    recipientCard.balance += amount;
 
-  // Save the updated sender and recipient documents
+    const incomingTransaction = {
+      date: new Date(),
+      amount,
+      sender: {
+        userId: senderUserId,
+        userFullName: senderUser.fullName,
+      },
+      purpose,
+      recipientCardType,
+    };
+
+    recipientUser.incomingCardTransactions.push(incomingTransaction);
+  }
+
   await senderUser.save();
-  await recipientUser.save();
+  if (recipientUser) {
+    await recipientUser.save(); // Save recipientUser only if found
+  }
 
   res.json({
     message: "Payment successful",
