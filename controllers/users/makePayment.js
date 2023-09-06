@@ -13,14 +13,14 @@ const makePayment = async (req, res, next) => {
   const recipientUser = await User.findOne({
     "cards.cardNumber": recipientCardNumber,
   });
-console.log('recipientUser', recipientUser);
+
   
   const recipientCardType = recipientUser
     ? recipientUser.cards.find(
         (card) => card.cardNumber === recipientCardNumber
       ).cardType
     : null;
-  console.log("recipientCardType", recipientCardType);
+  
 
   const senderCard = senderUser.cards.find(
     (card) => card.cardType === senderCardType
@@ -81,7 +81,9 @@ console.log('recipientUser', recipientUser);
       cardType: recipientCardType,
     };
 
-    recipientUser.incomingCardTransactions.push(incomingTransaction);
+    if (recipientUser) {
+  recipientUser.incomingCardTransactions.push(incomingTransaction);
+};
   }
 
   await senderUser.save();
