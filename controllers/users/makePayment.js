@@ -87,7 +87,8 @@ const makePayment = async (req, res, next) => {
   }
 
   await senderUser.save();
-   await recipientUser.save();
+  if (recipientUser) {  await recipientUser.save();};
+  
 
   res.json({
     message: "Payment successful",
