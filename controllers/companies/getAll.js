@@ -20,10 +20,9 @@ const sortBy = req.query.sortBy || "companyName";
 
     let query = Company.find({}).skip((page - 1) * perPage).limit(perPage);
 
-    if (sortBy === "companyName") {
-      
-      query = query.sort({ companyName: sortOrder === "asc" ? 1 : -1 });
-    }
+   if (sortBy === "companyName") {
+  query = query.sort({ companyName: 1 });
+}
 
     const companies = await query.exec();
 
