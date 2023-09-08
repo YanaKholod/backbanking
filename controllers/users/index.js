@@ -7,7 +7,7 @@ const performTransaction = require("./performTransaction");
 const getAllUsers = require("./getAll");
 const getUserById = require("./getUserById");
 const makePayment = require("./makePayment");
-
+const addDeposit = require("./addDeposit");
 module.exports = {
   register,
   login,
@@ -18,4 +18,5 @@ module.exports = {
   getAllUsers,
   getUserById,
   makePayment,
+  addDeposit,
 };

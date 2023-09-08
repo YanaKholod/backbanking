@@ -47,4 +47,10 @@ router.patch(
   controlWrapper(authController.makePayment)
 );
 
+router.patch(
+  "/addDeposit",
+  authenticate,
+  controlWrapper(authController.addDeposit)
+);
+
 module.exports = router;
