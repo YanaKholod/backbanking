@@ -13,7 +13,7 @@ const addDeposit = async (req, res) => {
 
   const deposit = {
     sumOfDeposit,
-    fromCard,
+    fromCard: { cardType: fromCard.cardType, id: fromCard.id, },
     depositType,
     interestRate,
   };
