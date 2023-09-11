@@ -1,5 +1,5 @@
 const getCurrent = async (req, res) => {
-  const { phone, fullName, role, outcomingTransactions, cards, id, incomingCardTransactions, outgoingCardTransactions } = req.user;
+  const { phone, fullName, role, outcomingTransactions, cards, id, incomingCardTransactions, outgoingCardTransactions, deposits } = req.user;
 
   res.json({
     id,
@@ -10,6 +10,7 @@ const getCurrent = async (req, res) => {
     outcomingTransactions,
     incomingCardTransactions,
     outgoingCardTransactions,
+    deposits,
   });
 };
 
