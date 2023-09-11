@@ -22,7 +22,7 @@ const card = user.cards.find((card) => card._id.equals(new mongoose.Types.Object
     throw new HttpError(400, "Insufficient balance");
   }
   
-  card.balance -= amount;
+  card.balance -= sumOfDeposit;
   const deposit = {
     sumOfDeposit,
     fromCard: { cardType: fromCard.cardType, id: fromCard.id, },
