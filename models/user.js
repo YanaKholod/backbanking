@@ -68,6 +68,17 @@ const userSchema = new Schema(
         cardType: { type: String, default: "" },
       },
     ],
+     deposits: [
+      {
+        sumOfDeposit: { type: Number, default: 0 },
+        fromCard: {
+            cardType: { type: String, required: true },
+            id: { type: Schema.Types.ObjectId, ref: "user" },
+          },
+        depositType: { type: String, default: ""  },
+        interestRate: { type: Number, default: 0 },
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
