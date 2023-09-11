@@ -26,7 +26,7 @@ const userSchema = new Schema(
     role: { type: String, default: "user" },
     cards: [
       {
-        cardType: { type: String, default: "" }, // Add required: true for cardType
+        cardType: { type: String, default: "" }, 
         cardNumber: { type: String, default: "" },
         balance: { type: Number, default: 0 },
       },
@@ -72,7 +72,7 @@ const userSchema = new Schema(
       {
         sumOfDeposit: { type: Number, default: 0 },
         fromCard: {
-            cardType: { type: String, required: true },
+            cardType: { type: String, default: "" },
             id: { type: Schema.Types.ObjectId, ref: "user" },
           },
         depositType: { type: String, default: ""  },
