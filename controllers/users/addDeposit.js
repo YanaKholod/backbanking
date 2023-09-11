@@ -3,9 +3,9 @@ const User = require("../../models/user");
 
 const addDeposit = async (req, res) => {
   const { id } = req.params;
-  const { sumOfDeposit, fromCard, depositType, interestRate } = req.body;
+  const { userId, sumOfDeposit, fromCard, depositType, interestRate } = req.body;
 
-  const user = await User.findOne({ _id: id });
+  const user = await User.findOne({ _id: userId });
 
   if (!user) {
     throw new HttpError(404, "User not found");
