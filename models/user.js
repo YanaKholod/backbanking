@@ -77,6 +77,7 @@ const userSchema = new Schema(
           },
         depositType: { type: String, default: ""  },
         interestRate: { type: Number, default: 0 },
+         depositTerm: { type: Number, default: 0 },
       },
     ],
   },
