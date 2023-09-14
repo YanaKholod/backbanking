@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const addDeposit = async (req, res) => {
   const { id } = req.params;
-  const { userId, sumOfDeposit, fromCard, depositType, interestRate } = req.body;
+  const { userId, sumOfDeposit, fromCard, depositType, interestRate, depositTerm } = req.body;
 
   const user = await User.findOne({ _id: userId });
 
@@ -28,6 +28,7 @@ const card = user.cards.find((card) => card._id.equals(new mongoose.Types.Object
     fromCard: { cardType: fromCard.cardType, id: fromCard.id, },
     depositType,
     interestRate,
+    depositTerm,
   };
 
   user.deposits.push(deposit);
