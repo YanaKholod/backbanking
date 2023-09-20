@@ -25,8 +25,9 @@ const getAllCompanies = async (req, res) => {
 
   if (sortBy === "companyName") {
       const sortDirection = sortOrder === "asc" ? 1 : -1;
-      query = query.sort({ companyName: sortDirection });
-    }
+      query = query.collation({ locale: "en", strength: 1 }).sort({ companyName: sortDirection });
+  }
+  
 
   const companies = await query.exec();
 
