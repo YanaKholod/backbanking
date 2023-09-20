@@ -3,7 +3,6 @@ const User = require("../../models/user");
 const mongoose = require("mongoose"); 
 
 const addDeposit = async (req, res) => {
-  const { id } = req.params;
   const { userId, sumOfDeposit, fromCard, depositType, interestRate, depositTerm } = req.body;
 
   const user = await User.findOne({ _id: userId });
