@@ -30,6 +30,7 @@ const getAllCompanies = async (req, res) => {
   }
 
   const companies = await query.exec();
+  console.log(companies);
 
   res.json({
     companies,
