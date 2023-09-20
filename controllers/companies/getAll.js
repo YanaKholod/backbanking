@@ -16,10 +16,12 @@ const getAllCompanies = async (req, res) => {
   const totalCompanies = await Company.countDocuments({});
   const totalPages = Math.ceil(totalCompanies / perPage);
 
-  const { sortBy, sortOrder } = sort || {};
   let query = Company.find({})
     .skip((page - 1) * perPage)
     .limit(perPage);
+
+  const sortBy = req.query.sortBy || "companyName";
+    const sortOrder = req.query.sortOrder || "asc";
 
   if (sortBy === "companyName") {
       const sortDirection = sortOrder === "asc" ? 1 : -1;
