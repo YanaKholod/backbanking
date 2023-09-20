@@ -22,15 +22,12 @@ const getAllCompanies = async (req, res) => {
     .limit(perPage);
 
   if (sortBy === "companyName") {
-    if (sortOrder === "asc") {
-      query = query.sort({ companyName: 1 });
-    } else if (sortOrder === "desc") {
-      query = query.sort({ companyName: -1 });
+      const sortDirection = sortOrder === "asc" ? 1 : -1;
+      query = query.sort({ companyName: sortDirection });
     }
-  }
 
   const companies = await query.exec();
-  console.log(companies);
+
 
   res.json({
     companies,
