@@ -15,20 +15,22 @@ mongoose
     const wss = new WebSocket.Server({ server });
 
     wss.on("connection", (ws) => {
+       console.log("A client connected to the WebSocket");
+      
       ws.on("message", (message) => {
         try {
-          const parsedMessage = JSON.parse(message);
-          const senderRole = parsedMessage.role;
+          
+          const senderRole = message.role;
 
           wss.clients.forEach((client) => {
             if (client !== ws && client.readyState === WebSocket.OPEN) {
               if (senderRole === "user" && client._socket.role === "admin") {
-                client.send(JSON.stringify(parsedMessage));
+                client.send(message);
               } else if (
                 senderRole === "admin" &&
                 client._socket.role === "user"
               ) {
-                client.send(JSON.stringify(parsedMessage));
+                client.send(message);
               }
             }
           });
