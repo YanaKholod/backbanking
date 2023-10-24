@@ -18,6 +18,7 @@ mongoose
        console.log("A client connected to the WebSocket");
       
       ws.on("message", (message) => {
+        consoloe.log(message, 'message);
         try {
           
           const senderRole = message.role;
